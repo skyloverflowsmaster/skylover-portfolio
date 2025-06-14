@@ -1,96 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <title>Skylover Flowsmaster | Hacker Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="google-site-verification" content="sbMT09mJJbat0dtDuSoBGaFg0zDSMEDQvFfR6x1wFhQ" />
-  <title>Skylover Flowsmaster | Web & Security Developer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Orbitron', monospace;
       background: #000;
       color: #00ffcc;
-      margin: 0;
-      padding: 20px;
       overflow-x: hidden;
     }
-    canvas#matrixRain {
+
+    canvas#matrixCanvas {
       position: fixed;
       top: 0;
       left: 0;
+      z-index: 0;
       width: 100%;
       height: 100%;
-      z-index: -2;
-      background: #000;
       pointer-events: none;
     }
-    canvas#particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-    }
+
     .container {
+      z-index: 2;
+      position: relative;
       max-width: 900px;
-      margin: auto;
-      background: rgba(17, 17, 17, 0.9);
+      margin: 60px auto;
+      background: rgba(17, 17, 17, 0.85);
       padding: 40px;
       border-radius: 15px;
       box-shadow: 0 0 25px #00ffcc66;
-      position: relative;
-      z-index: 2;
     }
+
     h1 {
       font-size: 36px;
+      text-align: center;
       color: #00ffff;
       text-shadow: 0 0 10px #00ffffaa;
-      border-bottom: 2px solid #00ffcc44;
-      padding-bottom: 10px;
-      animation: glowText 2s infinite alternate;
+      animation: glitch 1.5s infinite alternate;
     }
-    @keyframes glowText {
-      from { text-shadow: 0 0 10px #00ffffaa; }
-      to { text-shadow: 0 0 20px red; color: #ff4444; }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red, -2px 0 #0f0; }
+      100% { text-shadow: -2px 0 red, 2px 0 #0f0; }
     }
+
     h3 {
       color: #00ff99;
       margin-top: 30px;
       border-left: 4px solid #00ffcc;
       padding-left: 10px;
-      transition: all 0.3s ease;
+      transition: 0.3s;
     }
-    h3:hover { color: #ff4444; border-left-color: #ff4444; }
-    ul { list-style-type: none; padding-left: 0; }
-    ul li::before { content: none; }
+
+    h3:hover {
+      color: red;
+      border-left-color: red;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
     ul li {
       margin-bottom: 10px;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s;
     }
-    ul li:hover { transform: translateX(10px); color: #ff4444; }
-    a { color: #00ffff; text-decoration: none; }
+
+    ul li:hover {
+      transform: translateX(10px);
+      color: red;
+    }
+
+    .icon {
+      color: #ffaa00;
+      margin-right: 10px;
+    }
+
     .btn {
+      display: inline-block;
+      margin-top: 20px;
       background: #00ffcc;
       color: #000;
       padding: 12px 30px;
       border-radius: 8px;
-      text-align: center;
-      display: inline-block;
       font-weight: bold;
+      text-decoration: none;
       box-shadow: 0 0 10px #00ffcc88;
-      transition: background 0.3s, transform 0.2s;
+      transition: 0.3s;
     }
+
     .btn:hover {
-      background: #ff4444;
-      color: #fff;
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #ff4444aa;
+      background: red;
+      color: white;
+      box-shadow: 0 0 15px red;
     }
+
+    .skills-bar {
+      background: #333;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 10px 0 25px;
+    }
+
+    .bar {
+      height: 20px;
+      background: linear-gradient(90deg, #00ffcc, #00ffff);
+      text-align: right;
+      padding-right: 10px;
+      color: #000;
+      font-size: 14px;
+      font-weight: bold;
+      width: 0;
+      animation: fillBar 2s ease-out forwards;
+    }
+
+    @keyframes fillBar {
+      to { width: var(--fill); }
+    }
+
     .pulse {
       width: 12px;
       height: 12px;
@@ -101,49 +135,32 @@
       display: inline-block;
       margin-right: 10px;
     }
+
     @keyframes pulse {
       0% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.5); opacity: 0.5; }
       100% { transform: scale(1); opacity: 1; }
     }
-    .icon { color: #ffaa00; margin-right: 10px; }
-    .skills-bar {
-      background: #333;
-      border-radius: 20px;
-      overflow: hidden;
-      margin: 10px 0 25px;
-    }
-    .bar {
-      height: 20px;
-      background: linear-gradient(90deg, #00ffcc, #00ffff);
-      text-align: right;
-      padding-right: 10px;
-      color: #000;
-      font-size: 14px;
-      font-weight: bold;
-      animation: fillBar 2s ease-out forwards;
-      width: 0;
-    }
-    @keyframes fillBar {
-      to { width: var(--fill); }
-    }
   </style>
 </head>
 <body>
-<canvas id="matrixRain"></canvas>
-<canvas id="particles"></canvas>
+
+<!-- MATRIX RAIN BACKGROUND -->
+<canvas id="matrixCanvas"></canvas>
+
+<!-- MAIN CONTENT -->
 <div class="container">
   <h1><span class="pulse"></span> Skylover Flowsmaster</h1>
-  <p><strong>Professional Web Developer | Ethical Hacker | Secure Systems Builder</strong></p>
+  <p style="text-align:center;"><strong>Professional Web Developer | Ethical Hacker | Secure Systems Builder</strong></p>
 
   <h3><i class="fas fa-tools icon"></i> Services I Offer:</h3>
   <ul>
-    <li><i class="fas fa-code icon"></i>Full Website Design (Frontend & Backend)</li>
-    <li><i class="fas fa-qrcode icon"></i>QR Code Certificate Authentication Systems</li>
-    <li><i class="fas fa-hand-holding-usd icon"></i>Investment and Referral Websites (with Payment Integration)</li>
-    <li><i class="fas fa-lock icon"></i>Secure Login + Admin Dashboard</li>
-    <li><i class="fas fa-wallet icon"></i>Flutterwave Wallet Funding Integration</li>
-    <li><i class="fas fa-user-shield icon"></i>Cybersecurity Consultation & Ethical Hacking (basic)</li>
+    <li><i class="fas fa-code icon"></i> Full Website Design (Frontend & Backend)</li>
+    <li><i class="fas fa-qrcode icon"></i> QR Code Certificate Authentication Systems</li>
+    <li><i class="fas fa-hand-holding-usd icon"></i> Investment & Referral Websites (with Payment Integration)</li>
+    <li><i class="fas fa-lock icon"></i> Secure Login + Admin Dashboard</li>
+    <li><i class="fas fa-wallet icon"></i> Flutterwave Wallet Funding Integration</li>
+    <li><i class="fas fa-user-shield icon"></i> Cybersecurity Consultation & Ethical Hacking (basic)</li>
   </ul>
 
   <h3><i class="fas fa-chart-line icon"></i> My Skills</h3>
@@ -158,98 +175,62 @@
 
   <h3><i class="fas fa-phone-alt icon"></i> Contact Me</h3>
   <p><i class="fab fa-whatsapp icon"></i> WhatsApp: <strong>+234 8142823962</strong><br>
-  <i class="fas fa-envelope icon"></i> Email: <strong>skyloverflowsmaster@gmail.com</strong></p>
+     <i class="fas fa-envelope icon"></i> Email: <strong>skyloverflowsmaster@gmail.com</strong></p>
 
   <h3><i class="fas fa-briefcase icon"></i> My Past Projects</h3>
   <ul>
-    <li><i class="fas fa-certificate icon"></i>Certificate QR Auth System</li>
-    <li><i class="fas fa-rocket icon"></i>Musk Investment Platform</li>
-    <li><i class="fas fa-store icon"></i>Shopping Plaza T-Brite</li>
+    <li><i class="fas fa-certificate icon"></i> Certificate QR Auth System</li>
+    <li><i class="fas fa-rocket icon"></i> Musk Investment Platform</li>
+    <li><i class="fas fa-store icon"></i> Shopping Plaza T-Brite</li>
   </ul>
 
-  <p><a href="https://wa.me/2348142823962" class="btn"><i class="fas fa-bolt"></i> Hire Me Now</a></p>
+  <p style="text-align:center;">
+    <a href="https://wa.me/2348142823962" class="btn"><i class="fas fa-bolt"></i> Hire Me Now</a>
+  </p>
 </div>
 
+<!-- Matrix Rain Script -->
 <script>
-  // Matrix Rain
-  const canvasRain = document.getElementById("matrixRain");
-  const ctxRain = canvasRain.getContext("2d");
-  canvasRain.width = window.innerWidth;
-  canvasRain.height = window.innerHeight;
+  const canvas = document.getElementById("matrixCanvas");
+  const ctx = canvas.getContext("2d");
 
-  const chars = "01#$%&*()@ΔΞΩ";
-  const fontSize = 14;
-  const columns = canvasRain.width / fontSize;
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const binary = "010101001001101010010010101";
+  const fontSize = 16;
+  const columns = canvas.width / fontSize;
   const drops = Array.from({ length: columns }).fill(1);
 
-  function drawMatrixRain() {
-    ctxRain.fillStyle = "rgba(0, 0, 0, 0.05)";
-    ctxRain.fillRect(0, 0, canvasRain.width, canvasRain.height);
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = Math.random() > 0.5 ? "#0f0" : "#f00";
+    ctx.font = fontSize + "px monospace";
 
     for (let i = 0; i < drops.length; i++) {
-      const char = chars[Math.floor(Math.random() * chars.length)];
-      ctxRain.fillStyle = Math.random() > 0.5 ? "#0f0" : "#f00";
-      ctxRain.fillText(char, i * fontSize, drops[i] * fontSize);
+      const text = binary[Math.floor(Math.random() * binary.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-      if (drops[i] * fontSize > canvasRain.height && Math.random() > 0.975) {
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
         drops[i] = 0;
       }
       drops[i]++;
     }
   }
 
-  ctxRain.font = fontSize + "px monospace";
-  setInterval(drawMatrixRain, 33);
-
-  // Particles (optional effect)
-  const canvas = document.getElementById("particles");
-  const ctx = canvas.getContext("2d");
-  let particlesArray;
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const colors = ["#00ffcc", "#00ffff", "#ffaa00"];
-  function Particle() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 1;
-    this.speedX = Math.random() * 1 - 0.5;
-    this.speedY = Math.random() * 1 - 0.5;
-    this.color = colors[Math.floor(Math.random() * colors.length)];
-  }
-
-  Particle.prototype.update = function() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-    if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-  };
-
-  Particle.prototype.draw = function() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = this.color;
-    ctx.fill();
-  };
-
-  function init() {
-    particlesArray = [];
-    for (let i = 0; i < 120; i++) {
-      particlesArray.push(new Particle());
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particlesArray.length; i++) {
-      particlesArray[i].update();
-      particlesArray[i].draw();
-    }
-    requestAnimationFrame(animate);
-  }
-
-  init();
-  animate();
+  setInterval(draw, 35);
 </script>
+
+<!-- Audio: Background Funk + Typing Sound -->
+<audio autoplay loop>
+  <source src="https://files.catbox.moe/nhfmpa.mp3" type="audio/mp3"> <!-- Funk beat -->
+</audio>
+
+<audio autoplay loop>
+  <source src="https://files.catbox.moe/mnmv1d.mp3" type="audio/mp3"> <!-- Matrix typing -->
+</audio>
+
 </body>
 </html>
