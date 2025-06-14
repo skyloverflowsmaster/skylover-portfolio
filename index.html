@@ -17,6 +17,25 @@
       padding: 20px;
       overflow-x: hidden;
     }
+    canvas#matrixRain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: #000;
+      pointer-events: none;
+    }
+    canvas#particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
     .container {
       max-width: 900px;
       margin: auto;
@@ -26,15 +45,6 @@
       box-shadow: 0 0 25px #00ffcc66;
       position: relative;
       z-index: 2;
-    }
-    canvas#particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
     }
     h1 {
       font-size: 36px;
@@ -120,6 +130,7 @@
   </style>
 </head>
 <body>
+<canvas id="matrixRain"></canvas>
 <canvas id="particles"></canvas>
 <div class="container">
   <h1><span class="pulse"></span> Skylover Flowsmaster</h1>
@@ -160,6 +171,37 @@
 </div>
 
 <script>
+  // Matrix Rain
+  const canvasRain = document.getElementById("matrixRain");
+  const ctxRain = canvasRain.getContext("2d");
+  canvasRain.width = window.innerWidth;
+  canvasRain.height = window.innerHeight;
+
+  const chars = "01#$%&*()@ΔΞΩ";
+  const fontSize = 14;
+  const columns = canvasRain.width / fontSize;
+  const drops = Array.from({ length: columns }).fill(1);
+
+  function drawMatrixRain() {
+    ctxRain.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctxRain.fillRect(0, 0, canvasRain.width, canvasRain.height);
+
+    for (let i = 0; i < drops.length; i++) {
+      const char = chars[Math.floor(Math.random() * chars.length)];
+      ctxRain.fillStyle = Math.random() > 0.5 ? "#0f0" : "#f00";
+      ctxRain.fillText(char, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvasRain.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+
+  ctxRain.font = fontSize + "px monospace";
+  setInterval(drawMatrixRain, 33);
+
+  // Particles (optional effect)
   const canvas = document.getElementById("particles");
   const ctx = canvas.getContext("2d");
   let particlesArray;
@@ -167,7 +209,6 @@
   canvas.height = window.innerHeight;
 
   const colors = ["#00ffcc", "#00ffff", "#ffaa00"];
-
   function Particle() {
     this.x = Math.random() * canvas.width;
     this.y = Math.random() * canvas.height;
@@ -180,7 +221,6 @@
   Particle.prototype.update = function() {
     this.x += this.speedX;
     this.y += this.speedY;
-
     if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
     if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
   };
