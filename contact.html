@@ -148,12 +148,51 @@
 
   <section class="contact-section">
     <h2><i class="fas fa-paper-plane"></i> Get In Touch</h2>
-    <form class="contact-form">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
-    </form>
+    <!-- Include Font Awesome in <head> of your HTML -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<!-- Contact Form -->
+<form id="contactForm" action="https://formsubmit.co/ibrahimishaku2005@gmail.com" method="POST" style="max-width: 400px; margin: auto;">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="#success">
+
+  <!-- Name -->
+  <div style="margin-bottom: 15px;">
+    <i class="fas fa-user" style="margin-right: 8px;"></i>
+    <input type="text" name="name" placeholder="Your Name" required style="width: 90%; padding: 8px;" />
+  </div>
+
+  <!-- Email -->
+  <div style="margin-bottom: 15px;">
+    <i class="fas fa-envelope" style="margin-right: 8px;"></i>
+    <input type="email" name="email" placeholder="Your Email" required style="width: 90%; padding: 8px;" />
+  </div>
+
+  <!-- Message -->
+  <div style="margin-bottom: 15px;">
+    <i class="fas fa-comment-dots" style="margin-right: 8px;"></i>
+    <textarea name="message" placeholder="Your Message" required rows="4" style="width: 90%; padding: 8px;"></textarea>
+  </div>
+
+  <!-- Submit -->
+  <button type="submit" style="padding: 10px 20px; background-color: #5c00e6; color: white; border: none; border-radius: 5px;">
+    <i class="fas fa-paper-plane"></i> Send Message
+  </button>
+</form>
+
+<!-- Success Message -->
+<div id="successMessage" style="display: none; margin-top: 20px; text-align: center; color: green;">
+  <i class="fas fa-check-circle"></i> Message sent successfully!
+</div>
+
+<!-- JavaScript to Show Message -->
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    if (window.location.href.includes("#success")) {
+      document.getElementById("successMessage").style.display = "block";
+    }
+  });
+</script>
     <a class="whatsapp-button" href="https://wa.me/2348142823962" target="_blank">
       <i class="fab fa-whatsapp"></i> Message me on WhatsApp
     </a>
