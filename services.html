@@ -1,0 +1,182 @@
+<!-- services.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skylover | Services</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #111;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      color: #ff0000;
+      font-weight: bold;
+      font-size: 22px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #ccc;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #ff0000;
+      transform: scale(1.05);
+    }
+
+    .services {
+      padding: 60px 20px;
+      text-align: center;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .services h2 {
+      font-size: 28px;
+      color: #ff0000;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px #ff000055;
+    }
+
+    .service-group {
+      display: grid;
+      gap: 30px;
+      justify-content: center;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .service-box {
+      background-color: #111;
+      border: 1px solid #ff000033;
+      padding: 25px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #ff000022;
+      text-align: left;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: slideInUp 1s ease forwards;
+    }
+
+    .service-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 30px #ff000088;
+    }
+
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .service-box h3 {
+      color: #ff4444;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .service-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .service-box ul li {
+      margin: 8px 0;
+      padding-left: 22px;
+      position: relative;
+      color: #ccc;
+    }
+
+    .service-box ul li::before {
+      content: "\f058";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: #ff4444;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Skylover</div>
+    <nav>
+      <ul>
+        <li><a href="index.html"><i class="fas fa-house"></i> Home</a></li>
+        <li><a href="services.html" class="active"><i class="fas fa-laptop-code"></i> Services</a></li>
+        <li><a href="about.html" class="active"><i class="fas fa-user"></i> About</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="services">
+    <h2>Our Powerful Services</h2>
+
+    <div class="service-group">
+      <div class="service-box">
+        <h3><i class="fas fa-code"></i> Full Stack Development</h3>
+        <ul>
+          <li>Responsive Website & Landing Page Design</li>
+          <li>Smart Admin Dashboards</li>
+          <li>Secure Login & Authentication</li>
+          <li>Payment Integration (Paystack, Flutterwave)</li>
+          <li>Database-Driven PHP/JavaScript Apps</li>
+        </ul>
+      </div>
+
+      <div class="service-box">
+        <h3><i class="fas fa-shield-alt"></i> Cybersecurity & Hacking</h3>
+        <ul>
+          <li>OSINT (Information Gathering)</li>
+          <li>Account Recovery & Hacker Tracing</li>
+          <li>Penetration Testing (Legal Only)</li>
+          <li>Spy Tools (Legal Monitoring Only)</li>
+          <li>Security Audits & Bug Hunting</li>
+        </ul>
+      </div>
+
+      <div class="service-box">
+        <h3><i class="fas fa-cogs"></i> Automation & Productivity</h3>
+        <ul>
+          <li>Custom Bots for Social/Business</li>
+          <li>Time Tracking & Analytics Dashboards</li>
+          <li>QR Code Certificate Systems</li>
+          <li>Portfolio & Resume Builder Systems</li>
+          <li>Surveillance & Monitoring Tools</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
