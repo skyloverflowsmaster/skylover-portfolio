@@ -34,6 +34,8 @@
       list-style: none;
       gap: 20px;
       flex-wrap: wrap;
+      padding: 0;
+      margin: 0;
     }
 
     nav ul li a {
@@ -51,7 +53,7 @@
 
     .contact-section {
       padding: 60px 20px;
-      animation: fadeIn 0.8s ease-in-out;
+      animation: fadeIn 1s ease-in-out;
     }
 
     .contact-section h2 {
@@ -68,7 +70,7 @@
       background: #111;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 0 20px #ff000022;
+      box-shadow: 0 0 20px #ff000033;
       animation: slideInUp 1s ease;
     }
 
@@ -81,10 +83,11 @@
       border-radius: 5px;
       background-color: #222;
       color: #fff;
+      font-size: 15px;
     }
 
     .contact-form button {
-      background: #5c00e6;
+      background: #ff0000;
       color: white;
       padding: 12px;
       border: none;
@@ -92,11 +95,13 @@
       width: 100%;
       font-size: 16px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.4s ease, transform 0.3s ease;
+      animation: pulse 1.5s infinite;
     }
 
     .contact-form button:hover {
-      background-color: #4a00c8;
+      background-color: #cc0000;
+      transform: scale(1.02);
     }
 
     .whatsapp-button {
@@ -136,6 +141,26 @@
     @keyframes fadeIn {
       from { opacity: 0; }
       to   { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.5); }
+      50% { box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.3); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .contact-form {
+        padding: 20px;
+      }
+
+      .contact-section h2 {
+        font-size: 22px;
+      }
+
+      .contact-form button {
+        font-size: 15px;
+      }
     }
   </style>
 </head>
